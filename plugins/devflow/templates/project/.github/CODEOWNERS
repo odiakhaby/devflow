@@ -1,0 +1,8 @@
+# Zones sensibles : revue du propriétaire attendue.
+# Utile surtout pour les PR ouvertes par claude[bot] via GitHub Actions.
+/prisma/              @{{GITHUB_OWNER}}
+**/migrations/        @{{GITHUB_OWNER}}
+**/auth/              @{{GITHUB_OWNER}}
+/docs/adr/            @{{GITHUB_OWNER}}
+/.github/             @{{GITHUB_OWNER}}
+package.json          @{{GITHUB_OWNER}}

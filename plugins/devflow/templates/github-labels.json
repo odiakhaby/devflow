@@ -1,0 +1,9 @@
+[
+  { "name": "spec", "color": "5319e7", "description": "Épique qui suit une spec devflow" },
+  { "name": "task", "color": "1d76db", "description": "Tâche implémentable en une PR" },
+  { "name": "bug", "color": "d73a4a", "description": "Comportement incorrect" },
+  { "name": "needs-arch-review", "color": "fbca04", "description": "Touche une zone sensible : revue d'archi requise" },
+  { "name": "arch-approved", "color": "0e8a16", "description": "Revue d'archi faite par l'humain" },
+  { "name": "ready-for-claude", "color": "c5def5", "description": "Autorise Claude à implémenter l'issue dans GitHub Actions" },
+  { "name": "blocked", "color": "b60205", "description": "En attente d'une décision ou d'une dépendance" }
+]

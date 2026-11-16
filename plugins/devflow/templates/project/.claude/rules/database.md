@@ -1,0 +1,12 @@
+---
+paths:
+  - "prisma/**"
+  - "**/schema.prisma"
+  - "**/migrations/**"
+  - "**/db/**"
+---
+- Le schéma de données est une zone sensible : ne le modifier que si le plan approuvé le prévoit, sinon s'arrêter et demander.
+- Une migration déjà versionnée ne se modifie jamais : créer une nouvelle migration avec `prisma migrate dev --name <nom-explicite>`.
+- Toute migration qui supprime ou renomme une colonne ou une table doit indiquer dans la PR comment les données existantes sont préservées.
+- Ajouter un index pour chaque clé étrangère et chaque colonne filtrée fréquemment ; le justifier dans la PR.
+- Pas de `prisma db push` en dehors du prototypage local.

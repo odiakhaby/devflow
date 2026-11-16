@@ -1,0 +1,12 @@
+{
+  "name": "devflow",
+  "displayName": "devflow",
+  "version": "0.1.0",
+  "description": "Framework de dev assisté par IA : discover → spec → plan → build (TDD) → PR. Garde-fous déterministes, validation humaine de l'architecture, du modèle de données et du merge.",
+  "author": {
+    "name": "Oumar Diakhaby",
+    "url": "https://oumar-diakhaby.com"
+  },
+  "license": "MIT",
+  "keywords": ["workflow", "spec-driven", "tdd", "github", "pull-request", "typescript"]
+}

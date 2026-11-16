@@ -1,0 +1,11 @@
+---
+paths:
+  - "**/auth/**"
+  - "**/auth.ts"
+  - "**/middleware.ts"
+  - "**/permissions/**"
+---
+- L'authentification et les autorisations sont une zone sensible : toute modification non prévue par le plan approuvé exige une validation humaine.
+- Vérifier les autorisations côté serveur sur chaque route ou action, jamais seulement côté client.
+- Chaque route protégée a des tests 401 (non connecté) et 403 (connecté mais non autorisé).
+- Ne jamais journaliser de token, mot de passe, code OTP ou cookie de session.

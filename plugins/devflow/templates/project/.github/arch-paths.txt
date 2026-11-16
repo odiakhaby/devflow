@@ -1,0 +1,26 @@
+# Expressions régulières (grep -E), une par ligne, testées sur les chemins modifiés par une PR.
+# Une correspondance déclenche le label needs-arch-review et exige arch-approved.
+# Adapter à la structure du projet.
+
+# Modèle de données
+(^|/)prisma/
+(^|/)schema\.prisma$
+(^|/)migrations/
+(^|/)drizzle/
+
+# Auth et autorisations
+(^|/)auth(/|\.ts$)
+(^|/)middleware\.ts$
+(^|/)permissions/
+
+# Dépendances (retirer si trop bruyant)
+(^|/)package\.json$
+
+# Décisions d'architecture
+^docs/adr/
+
+# Infra et CI
+^\.github/workflows/
+(^|/)Dockerfile
+(^|/)docker-compose[^/]*\.ya?ml$
+(^|/)\.env\.example$

@@ -1,0 +1,17 @@
+{
+  "name": "oumar-plugins",
+  "description": "Plugins Claude Code d'Oumar : devflow, framework de la clarification d'idée au code livré en PR.",
+  "owner": {
+    "name": "Oumar Diakhaby",
+    "url": "https://oumar-diakhaby.com"
+  },
+  "plugins": [
+    {
+      "name": "devflow",
+      "source": "./plugins/devflow",
+      "description": "Clarifier une idée, spécifier, planifier l'architecture, puis développer en TDD jusqu'à la PR. L'humain valide l'archi, le modèle de données et le merge.",
+      "category": "development",
+      "tags": ["workflow", "spec", "tdd", "github", "pull-request"]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+# Garde-fou déterministe : si une PR touche une zone sensible (liste dans .github/arch-paths.txt),
+# elle reçoit le label needs-arch-review et ce check reste rouge tant que l'humain n'a pas posé arch-approved.
+# Rendre ce check obligatoire dans la protection de branche de main.
+name: Arch guard
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  guard:
+    name: guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Détecter les zones sensibles
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          BASE: ${{ github.event.pull_request.base.ref }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          patterns=$(grep -vE '^\s*(#|$)' .github/arch-paths.txt || true)
+          if [ -z "$patterns" ]; then echo "Aucun motif défini."; exit 0; fi
+
+          changed=$(git diff --name-only "origin/${BASE}...HEAD")
+          sensitive=$(printf '%s\n' "$changed" | grep -E -f <(printf '%s\n' "$patterns") || true)
+
+          if [ -z "$sensitive" ]; then
+            echo "Aucune zone sensible touchée."
+            exit 0
+          fi
+
+          echo "Fichiers sensibles :"
+          printf ' - %s\n' $sensitive
+
+          labels=$(gh pr view "$PR" --repo "$REPO" --json labels -q '.labels[].name')
+          if ! printf '%s\n' "$labels" | grep -qx 'needs-arch-review'; then
+            gh pr edit "$PR" --repo "$REPO" --add-label needs-arch-review
+            {
+              echo "### 🧭 Revue d'architecture requise"
+              echo "Cette PR touche des zones sensibles :"
+              printf -- '- `%s`\n' $sensitive
+              echo
+              echo "Après revue, ajoute le label \`arch-approved\` pour débloquer le check **guard**."
+            } > body.md
+            gh pr comment "$PR" --repo "$REPO" --body-file body.md
+          fi
+
+          if printf '%s\n' "$labels" | grep -qx 'arch-approved'; then
+            echo "arch-approved présent : OK."
+            exit 0
+          fi
+
+          echo "::error::Zone sensible modifiée : label arch-approved requis."
+          exit 1

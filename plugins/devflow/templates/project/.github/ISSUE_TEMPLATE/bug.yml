@@ -1,0 +1,31 @@
+name: Bug
+description: Un comportement incorrect à corriger
+labels: ["bug"]
+body:
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportement observé
+      description: Messages d'erreur, logs (Splunk), captures.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportement attendu
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: |
+        1. …
+        2. …
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environnement
+      placeholder: prod / staging, navigateur, version de l'app mobile

@@ -1,0 +1,50 @@
+name: Tâche
+description: Une tâche implémentable en une PR (créée en général par /devflow:plan)
+labels: ["task"]
+body:
+  - type: input
+    id: spec
+    attributes:
+      label: Spec / plan
+      placeholder: docs/specs/003-magic-link-login/plan.md (tâche T2)
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte
+      description: Pourquoi cette tâche, ce qui existe déjà.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptation
+      description: Repris de la spec, au format AC-n — Étant donné / quand / alors.
+      placeholder: |
+        - AC-1 — Étant donné …, quand …, alors …
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Plan de test
+      placeholder: |
+        - API : POST /auth/magic-link → 200, 400, 429
+  - type: dropdown
+    id: sensitive
+    attributes:
+      label: Zone sensible
+      options:
+        - Non
+        - Oui — schéma BDD / migration
+        - Oui — auth / autorisations
+        - Oui — dépendance
+        - Oui — contrat d'API
+        - Oui — infra / CI
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Fichiers probables, dépendances, hors scope

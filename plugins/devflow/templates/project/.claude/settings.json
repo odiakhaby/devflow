@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(gh issue view *)",
+      "Bash(gh issue list *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr checks *)",
+      "Bash({{PM}} run *)",
+      "Bash({{PM}} exec vitest *)",
+      "Bash({{PM}} exec tsc *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Read(./.env.production)",
+      "Read(./.env.development)",
+      "Read(./**/.env)",
+      "Read(./**/.env.local)",
+      "Read(./**/.env.production)",
+      "Bash(gh pr merge *)",
+      "Bash(gh pr review * --approve*)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "oumar-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "{{GITHUB_OWNER}}/devflow"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "devflow@oumar-plugins": true
+  }
+}
